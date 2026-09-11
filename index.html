@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>NEXUS // INTELLIGENCE</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for Graphical Analysis -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Three.js and Globe.gl -->
+    <script src="https://unpkg.com/three"></script>
+    <script src="https://unpkg.com/globe.gl"></script>
+</head>
+<body>
+
+<header>
+    <div class="header-left">
+        <div class="logo">NEXUS <b>//</b> INTELLIGENCE</div>
+        <div class="subtitle">GLOBAL EVENT, DISASTER & MARKET ANALYTICS · LIVE GRID</div>
+    </div>
+    <div class="header-right">
+        <div class="live-indicator"><span class="dot"></span> LIVE</div>
+        <div class="clock" id="clock">--:--:-- IST</div>
+    </div>
+</header>
+
+<!-- SCROLLING MARKET & DISASTER TICKER -->
+<div class="ticker-wrap">
+    <div class="ticker" id="global-ticker"></div>
+</div>
+
+<div class="dashboard-wrapper">
+    
+    <!-- LEFT COLUMN: POSTURE, ROUTES, INFRA & ALERTS -->
+    <aside class="col col-left">
+        <div class="panel">
+            <div class="panel-header">REGION POSTURE <span class="header-region" id="hdr-region-id">INDO</span></div>
+            <div class="posture-content">
+                <div class="posture-info">
+                    <h2 id="region-name">Indian Subcontinent</h2>
+                    <div class="sub-label">COMPOSITE RISK SCORE</div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="risk-bar" style="width: 35%;"></div>
+                    </div>
+                </div>
+                <div class="posture-score" id="risk-score">35</div>
+            </div>
+            <div class="detailed-info">
+                <div class="info-row"><span class="sub-label">GDP EXPOSURE</span> <span class="value" id="info-gdp">3.7 $B</span></div>
+                <div class="info-row"><span class="sub-label">SUPPLY CAP</span> <span class="value" id="info-supply">88%</span></div>
+                <div class="info-row"><span class="sub-label">KEY HUBS</span> <span class="value hubs" id="hubs-container">Mumbai, Chennai</span></div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">KEY METRICS <span style="float: right; color: var(--dim);">⭘</span></div>
+            <div class="metrics-grid" id="kpis"></div>
+        </div>
+
+        <!-- STRATEGIC TRADE ROUTES -->
+        <div class="panel route-panel">
+            <div class="panel-header">STRATEGIC TRADE ROUTES <span class="header-region">MARITIME & AIRSPACE</span></div>
+            <div class="routes-container" id="routes-list"></div>
+        </div>
+
+        <!-- CRITICAL INFRASTRUCTURE -->
+        <div class="panel infra-panel">
+            <div class="panel-header">CRITICAL INFRASTRUCTURE <span class="header-region">GRID & CYBER</span></div>
+            <div class="infra-grid" id="infra-list"></div>
+        </div>
+
+        <!-- LIVE INCIDENT UPDATES -->
+        <div class="panel alert-panel">
+            <div class="panel-header">LIVE INCIDENT UPDATES <span class="header-region" style="color: var(--dim);">⚠ <span id="critical-count">4</span> CRITICAL</span></div>
+            <div class="alerts-container" id="alerts-list"></div>
+        </div>
+    </aside>
+
+    <!-- CENTER COLUMN: SQUARE GLOBE, MARKETS, CORP DENSITY -->
+    <main class="col col-center">
+        <div class="panel globe-panel">
+            <div class="panel-header">GLOBAL RISK MAP <span class="header-region">⭘ SECURE CONNECTION</span></div>
+            <div class="globe-square-wrapper">
+                <div class="map-wrap" id="globeViz"></div>
+            </div>
+            <div class="map-legend" id="region-legend"></div>
+        </div>
+
+        <div class="panel market-panel">
+            <div class="panel-header">EQUITIES & COMMODITIES TRADING BOARD</div>
+            <div class="market-grid" id="market-grid"></div>
+        </div>
+
+        <div class="panel macro-panel">
+            <div class="panel-header">MACRO-SOCIOECONOMIC PROFILE <span class="header-region" id="macro-region-id">INDO</span></div>
+            <div class="macro-grid" id="macro-grid"></div>
+        </div>
+
+        <div class="panel corp-panel">
+            <div class="panel-header">REGIONAL CORPORATE DENSITY (TOP 8) <span class="header-region" id="corp-region-id">INDO</span></div>
+            <div class="corp-grid" id="corp-grid"></div>
+        </div>
+    </main>
+
+    <!-- RIGHT COLUMN: GRAPH, DISASTERS & BRIEFING -->
+    <aside class="col col-right">
+        <div class="panel">
+            <div class="panel-header">RESOURCE VULNERABILITY MONITOR</div>
+            <div class="resource-tabs" id="resource-tabs"></div>
+            <div class="chart-subtitle">
+                <span id="active-chart-label">AGGREGATED VIEW</span>
+                <span class="vuln-index">AVG VULNERABILITY <span id="active-chart-idx">62</span></span>
+            </div>
+            <div class="chart-container">
+                <canvas id="resourceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="panel disaster-panel">
+            <div class="panel-header">DISASTER PREDICTION & MITIGATION</div>
+            <div class="disaster-list" id="disaster-list"></div>
+        </div>
+
+        <div class="panel briefing-panel">
+            <div class="panel-header">AI SYNTHESIS BRIEFING</div>
+            <div class="briefing-top">
+                <div class="countdown-wrapper">CYCLE <span id="countdown">00:60</span></div>
+                <button class="resynth-btn" onclick="updateDashboard()">⟳ FORCE RESYNTH</button>
+            </div>
+            <div id="briefingText" class="briefing-text"></div>
+        </div>
+    </aside>
+
+</div>
+
+<footer class="system-footer">
+    <div class="footer-left">
+        <span class="sys-version">NEXUS // OS v4.2.9</span>
+        <span class="divider">|</span>
+        <span class="sys-status"><span class="status-dot"></span> ALL SYSTEMS NOMINAL</span>
+    </div>
+    
+    <div class="footer-center">
+        <span class="copyright">© 2026 NEXUS INTELLIGENCE DIRECTORATE. RESTRICTED ACCESS.</span>
+        <span class="dev-credit">ENGINEERED BY <a href="https://linktr.ee/Debojyoti_Banerjee" target="_blank" rel="noopener noreferrer"><b>DEBOJYOTI BANERJEE</b></a> IN INDIA 🇮🇳</span>
+    </div>
+    
+    <div class="footer-right">
+        <span class="security">AES-256 ENCRYPTED</span>
+        <span class="divider">|</span>
+        <span class="ping" id="ping-readout">LATENCY: 14ms</span>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
