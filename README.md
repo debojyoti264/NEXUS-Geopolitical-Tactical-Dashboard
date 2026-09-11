@@ -4,6 +4,8 @@
 ![Tech Stack](https://img.shields.io/badge/Vanilla_JS-ES6+-f59e0b?style=for-the-badge&logo=javascript)
 ![WebGL](https://img.shields.io/badge/WebGL-globe.gl-8b5cf6?style=for-the-badge)
 
+![NEXUS Dashboard Overview](Demo.png)
+
 NEXUS is a high-performance, client-side tactical command center built entirely with HTML, CSS, and Vanilla JavaScript. It simulates a live geopolitical telemetry interface, featuring an interactive 3D globe, real-time seismic disaster tracking, procedural market analytics, and synthetic audio feedback.
 
 ## 🚀 Key Features
@@ -28,7 +30,7 @@ NEXUS is a high-performance, client-side tactical command center built entirely 
 Because this dashboard is built with vanilla web technologies, no build steps or package managers (like `npm`) are required.
 
 1. **Download the Repository:** Click `Code > Download ZIP` or clone the repository to your local machine.
-2. **Extract the Files:** Ensure `index.html`, `style.css`, and `script.js` are in the same directory.
+2. **Extract the Files:** Ensure `index.html`, `style.css`, `script.js`, and `Demo.png` are in the same directory.
 3. **Launch the Dashboard:** Simply double-click `index.html` to open it in any modern web browser.
 4. **Interact:** Click anywhere on the dashboard to initialize the Web Audio engine, then select regions on the globe to begin tracking telemetry.
 
