@@ -44,7 +44,3 @@ To enable the live AI situational reports, you must provide your own API key:
 
 **Debojyoti Banerjee**  
 Designed for tactical data visualization and interactive UI/UX experimentation.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).
